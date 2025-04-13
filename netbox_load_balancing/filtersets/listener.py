@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from django.db.models import Q
 from netbox.filtersets import NetBoxModelFilterSet
 
-from netbox_load_balancing.models import Listener, LBService, Pool
+from netbox_load_balancing.models import Listener, LBService
 from netbox_load_balancing.choices import ListenerProtocolChoices
 
 

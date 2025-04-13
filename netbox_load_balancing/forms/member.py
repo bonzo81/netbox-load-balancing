@@ -21,7 +21,6 @@ from ipam.models import IPAddress
 from netbox_load_balancing.models import (
     Member,
     MemberAssignment,
-    Listener,
 )
 
 
