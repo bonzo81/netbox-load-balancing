@@ -23,9 +23,7 @@ urlpatterns = [
     path(
         "service-assignments/",
         include(
-            get_model_urls(
-                "netbox_load_balancing", "lbserviceassignment", detail=False
-            )
+            get_model_urls("netbox_load_balancing", "lbserviceassignment", detail=False)
         ),
     ),
     path(
@@ -64,9 +62,7 @@ urlpatterns = [
     # Health Monitors
     path(
         "health-monitor/",
-        include(
-            get_model_urls("netbox_load_balancing", "healthmonitor", detail=False)
-        ),
+        include(get_model_urls("netbox_load_balancing", "healthmonitor", detail=False)),
     ),
     path(
         "health-monitor/<int:pk>/",
