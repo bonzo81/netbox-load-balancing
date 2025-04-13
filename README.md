@@ -32,7 +32,7 @@ This plugin provides following Models:
 
 |            |           |
 |------------|-----------|
-| NetBox 4.2 | \>= 1.0.2 |
+| NetBox 4.2 | \>= 1.0.0 |
 
 ## Installation
 
