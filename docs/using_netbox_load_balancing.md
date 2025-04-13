@@ -49,7 +49,7 @@ This will install NetBox DNS and all prerequisites within the NetBox virtual env
 To ensure that NetBox Load Balancing is updated when a NetBox update is performed,  include it in the local requirements file for NetBox:
 
 ```
-echo netbox-security >> /opt/netbox/local_requirements.txt
+echo netbox-load-balancing >> /opt/netbox/local_requirements.txt
 ```
 If the local requirements file does not exist, this command will create it.
 
