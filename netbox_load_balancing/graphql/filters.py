@@ -8,6 +8,8 @@ from netbox_load_balancing.models import (
     HealthMonitor,
     Pool,
     Member,
+    VirtualIPPool,
+    VirtualIP,
 )
 
 from netbox_load_balancing.filtersets import (
@@ -16,34 +18,48 @@ from netbox_load_balancing.filtersets import (
     HealthMonitorFilterSet,
     PoolFilterSet,
     MemberFilterSet,
+    VirtualIPPoolFilterSet,
+    VirtualIPFilterSet,
 )
 
 
 @strawberry_django.filter(LBService, lookups=True)
 @autotype_decorator(LBServiceFilterSet)
-class NetBoxLoadBalancerLBServiceFilter(BaseFilterMixin):
+class NetBoxLoadBalancingLBServiceFilter(BaseFilterMixin):
     pass
 
 
 @strawberry_django.filter(Listener, lookups=True)
 @autotype_decorator(ListenerFilterSet)
-class NetBoxLoadBalancerListenerFilter(BaseFilterMixin):
+class NetBoxLoadBalancingListenerFilter(BaseFilterMixin):
     pass
 
 
 @strawberry_django.filter(HealthMonitor, lookups=True)
 @autotype_decorator(HealthMonitorFilterSet)
-class NetBoxLoadBalancerHealthMonitorFilter(BaseFilterMixin):
+class NetBoxLoadBalancingHealthMonitorFilter(BaseFilterMixin):
     pass
 
 
 @strawberry_django.filter(Pool, lookups=True)
 @autotype_decorator(PoolFilterSet)
-class NetBoxLoadBalancerPoolFilter(BaseFilterMixin):
+class NetBoxLoadBalancingPoolFilter(BaseFilterMixin):
     pass
 
 
 @strawberry_django.filter(Member, lookups=True)
 @autotype_decorator(MemberFilterSet)
-class NetBoxLoadBalancerMemberFilter(BaseFilterMixin):
+class NetBoxLoadBalancingMemberFilter(BaseFilterMixin):
+    pass
+
+
+@strawberry_django.filter(VirtualIPPool, lookups=True)
+@autotype_decorator(VirtualIPPoolFilterSet)
+class NetBoxLoadBalancingVirtualIPPoolFilter(BaseFilterMixin):
+    pass
+
+
+@strawberry_django.filter(VirtualIP, lookups=True)
+@autotype_decorator(VirtualIPFilterSet)
+class NetBoxLoadBalancingVirtualIPFilter(BaseFilterMixin):
     pass

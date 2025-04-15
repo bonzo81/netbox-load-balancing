@@ -7,7 +7,7 @@ from netbox_load_balancing.models import LBService
 from netbox_load_balancing.filtersets import LBServiceFilterSet
 
 
-class AddressFiterSetTestCase(TestCase, ChangeLoggedFilterSetTests):
+class LBServiceFiterSetTestCase(TestCase, ChangeLoggedFilterSetTests):
     queryset = LBService.objects.all()
     filterset = LBServiceFilterSet
 

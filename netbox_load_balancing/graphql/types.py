@@ -13,21 +13,25 @@ from netbox_load_balancing.models import (
     HealthMonitor,
     Pool,
     Member,
+    VirtualIPPool,
+    VirtualIP,
 )
 
 from .filters import (
-    NetBoxLoadBalancerLBServiceFilter,
-    NetBoxLoadBalancerListenerFilter,
-    NetBoxLoadBalancerHealthMonitorFilter,
-    NetBoxLoadBalancerPoolFilter,
-    NetBoxLoadBalancerMemberFilter,
+    NetBoxLoadBalancingLBServiceFilter,
+    NetBoxLoadBalancingListenerFilter,
+    NetBoxLoadBalancingHealthMonitorFilter,
+    NetBoxLoadBalancingPoolFilter,
+    NetBoxLoadBalancingMemberFilter,
+    NetBoxLoadBalancingVirtualIPPoolFilter,
+    NetBoxLoadBalancingVirtualIPFilter,
 )
 
 
 @strawberry_django.type(
-    LBService, fields="__all__", filters=NetBoxLoadBalancerLBServiceFilter
+    LBService, fields="__all__", filters=NetBoxLoadBalancingLBServiceFilter
 )
-class NetBoxLoadBalancerLBServiceType(NetBoxObjectType):
+class NetBoxLoadBalancingLBServiceType(NetBoxObjectType):
     tenant: Annotated["TenantType", strawberry.lazy("tenancy.graphql.types")] | None
     name: str
     reference: str
@@ -35,13 +39,13 @@ class NetBoxLoadBalancerLBServiceType(NetBoxObjectType):
 
 
 @strawberry_django.type(
-    Listener, fields="__all__", filters=NetBoxLoadBalancerListenerFilter
+    Listener, fields="__all__", filters=NetBoxLoadBalancingListenerFilter
 )
-class NetBoxLoadBalancerListenerType(NetBoxObjectType):
+class NetBoxLoadBalancingListenerType(NetBoxObjectType):
     name: str
     service: (
         Annotated[
-            "NetBoxLoadBalancerLBServiceType",
+            "NetBoxLoadBalancingLBServiceType",
             strawberry.lazy("netbox_load_balancing.graphql.types"),
         ]
         | None
@@ -61,9 +65,9 @@ class NetBoxLoadBalancerListenerType(NetBoxObjectType):
 
 
 @strawberry_django.type(
-    HealthMonitor, fields="__all__", filters=NetBoxLoadBalancerHealthMonitorFilter
+    HealthMonitor, fields="__all__", filters=NetBoxLoadBalancingHealthMonitorFilter
 )
-class NetBoxLoadBalancerHealthMonitorType(NetBoxObjectType):
+class NetBoxLoadBalancingHealthMonitorType(NetBoxObjectType):
     name: str
     template: str | None
     type: str
@@ -79,12 +83,12 @@ class NetBoxLoadBalancerHealthMonitorType(NetBoxObjectType):
     disabled: bool
 
 
-@strawberry_django.type(Pool, fields="__all__", filters=NetBoxLoadBalancerPoolFilter)
-class NetBoxLoadBalancerPoolType(NetBoxObjectType):
+@strawberry_django.type(Pool, fields="__all__", filters=NetBoxLoadBalancingPoolFilter)
+class NetBoxLoadBalancingPoolType(NetBoxObjectType):
     listeners: (
         List[
             Annotated[
-                "NetBoxLoadBalancerListenerType",
+                "NetBoxLoadBalancingListenerType",
                 strawberry.lazy("netbox_load_balancing.graphql.types"),
             ]
         ]
@@ -101,10 +105,37 @@ class NetBoxLoadBalancerPoolType(NetBoxObjectType):
 
 
 @strawberry_django.type(
-    Member, fields="__all__", filters=NetBoxLoadBalancerMemberFilter
+    Member, fields="__all__", filters=NetBoxLoadBalancingMemberFilter
 )
-class NetBoxLoadBalancerMemberType(NetBoxObjectType):
+class NetBoxLoadBalancingMemberType(NetBoxObjectType):
     ip_address: Annotated["IPAddressType", strawberry.lazy("ipam.graphql.types")] | None
     name: str
     reference: str
     disabled: bool
+
+
+@strawberry_django.type(
+    VirtualIPPool, fields="__all__", filters=NetBoxLoadBalancingVirtualIPPoolFilter
+)
+class NetBoxLoadBalancingVirtualIPPoolType(NetBoxObjectType):
+    tenant: Annotated["TenantType", strawberry.lazy("tenancy.graphql.types")] | None
+    name: str
+    disabled: bool
+
+
+@strawberry_django.type(
+    VirtualIP, fields="__all__", filters=NetBoxLoadBalancingVirtualIPFilter
+)
+class NetBoxLoadBalancingVirtualIPType(NetBoxObjectType):
+    virtual_pool: (
+        Annotated[
+            "NetBoxLoadBalancingVirtualIPPoolType",
+            strawberry.lazy("netbox_load_balancing.graphql.types"),
+        ]
+        | None
+    )
+    address: Annotated["IPAddressType", strawberry.lazy("ipam.graphql.types")] | None
+    name: str
+    dns_name: str
+    disabled: bool
+    route_health_injection: bool

@@ -30,6 +30,37 @@ urlpatterns = [
         "service-assignments/<int:pk>/",
         include(get_model_urls("netbox_load_balancing", "lbserviceassignment")),
     ),
+    # Virtual Pools
+    path(
+        "virtual-pool/",
+        include(get_model_urls("netbox_load_balancing", "virtualippool", detail=False)),
+    ),
+    path(
+        "virtual-pool/<int:pk>/",
+        include(get_model_urls("netbox_load_balancing", "virtualippool")),
+    ),
+    # Virtual Pool Assignments
+    path(
+        "virtual-pool-assignments/",
+        include(
+            get_model_urls(
+                "netbox_load_balancing", "virtualippoolassignment", detail=False
+            )
+        ),
+    ),
+    path(
+        "virtual-pool-assignments/<int:pk>/",
+        include(get_model_urls("netbox_load_balancing", "virtualippoolassignment")),
+    ),
+    # Virtual Addresses
+    path(
+        "virtual-address/",
+        include(get_model_urls("netbox_load_balancing", "virtualip", detail=False)),
+    ),
+    path(
+        "virtual-address/<int:pk>/",
+        include(get_model_urls("netbox_load_balancing", "virtualip")),
+    ),
     # Listeners
     path(
         "listener/",

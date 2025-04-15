@@ -28,7 +28,7 @@ class MemberFilterSet(NetBoxModelFilterSet):
     )
     ip_address = django_filters.ModelMultipleChoiceFilter(
         queryset=IPAddress.objects.all(),
-        field_name="ip_address",
+        field_name="ip_address__address",
         to_field_name="address",
         label=_("Listener (Address)"),
     )

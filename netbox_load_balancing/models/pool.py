@@ -6,8 +6,8 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from netbox.models import PrimaryModel, NetBoxModel
 from netbox.models.features import ContactsMixin
 from netbox.search import SearchIndex, register_search
-from ipam.models import IPRange
 
+from netbox_load_balancing.models import LBService
 from netbox_load_balancing.constants import POOL_ASSIGNMENT_MODELS
 from netbox_load_balancing.choices import (
     PoolAlgorythmChoices,
@@ -148,5 +148,5 @@ GenericRelation(
     to=PoolAssignment,
     content_type_field="assigned_object_type",
     object_id_field="assigned_object_id",
-    related_query_name="iprange",
-).contribute_to_class(IPRange, "pools")
+    related_query_name="lbservice",
+).contribute_to_class(LBService, "pools")

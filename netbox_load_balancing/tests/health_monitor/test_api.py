@@ -1,7 +1,7 @@
 from utilities.testing import APIViewTestCases
 from netbox_load_balancing.tests.custom import (
     APITestCase,
-    NetBoxLoadBalancerGraphQLMixin,
+    NetBoxLoadBalancingGraphQLMixin,
 )
 from netbox_load_balancing.models import HealthMonitor
 from netbox_load_balancing.choices import (
@@ -16,7 +16,7 @@ class HealthMonitorAPITestCase(
     APIViewTestCases.CreateObjectViewTestCase,
     APIViewTestCases.UpdateObjectViewTestCase,
     APIViewTestCases.DeleteObjectViewTestCase,
-    NetBoxLoadBalancerGraphQLMixin,
+    NetBoxLoadBalancingGraphQLMixin,
     APIViewTestCases.GraphQLTestCase,
 ):
     model = HealthMonitor

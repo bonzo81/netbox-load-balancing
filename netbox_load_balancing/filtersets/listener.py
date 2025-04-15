@@ -3,16 +3,16 @@ from django.utils.translation import gettext_lazy as _
 from django.db.models import Q
 from netbox.filtersets import NetBoxModelFilterSet
 
-from netbox_load_balancing.models import Listener, LBService
+from netbox_load_balancing.models import Listener, LBService, Pool
 from netbox_load_balancing.choices import ListenerProtocolChoices
 
 
 class ListenerFilterSet(NetBoxModelFilterSet):
     pool_id = django_filters.ModelMultipleChoiceFilter(
-        queryset=Listener.objects.all(),
+        queryset=Pool.objects.all(),
         field_name="pool_listeners",
         to_field_name="id",
-        label=_("Listener (ID)"),
+        label=_("Pool (ID)"),
     )
     service_id = django_filters.ModelMultipleChoiceFilter(
         queryset=LBService.objects.all(),
@@ -22,7 +22,7 @@ class ListenerFilterSet(NetBoxModelFilterSet):
     )
     service = django_filters.ModelMultipleChoiceFilter(
         queryset=LBService.objects.all(),
-        field_name="service",
+        field_name="service__name",
         to_field_name="name",
         label=_("LBService (Name)"),
     )
