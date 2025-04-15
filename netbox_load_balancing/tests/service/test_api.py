@@ -1,7 +1,7 @@
 from utilities.testing import APIViewTestCases
 from netbox_load_balancing.tests.custom import (
     APITestCase,
-    NetBoxLoadBalancerGraphQLMixin,
+    NetBoxLoadBalancingGraphQLMixin,
 )
 from netbox_load_balancing.models import LBService
 
@@ -13,7 +13,7 @@ class LBServiceAPITestCase(
     APIViewTestCases.CreateObjectViewTestCase,
     APIViewTestCases.UpdateObjectViewTestCase,
     APIViewTestCases.DeleteObjectViewTestCase,
-    NetBoxLoadBalancerGraphQLMixin,
+    NetBoxLoadBalancingGraphQLMixin,
     APIViewTestCases.GraphQLTestCase,
 ):
     model = LBService

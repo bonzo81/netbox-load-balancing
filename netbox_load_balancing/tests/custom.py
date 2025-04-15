@@ -13,7 +13,7 @@ from ipam.graphql.types import IPAddressFamilyType
 
 def get_graphql_type_for_model(model):
     app_label, model_name = model._meta.label.split(".")
-    class_name = f"{app_label}.graphql.types.NetBoxLoadBalancer{model_name}Type"
+    class_name = f"{app_label}.graphql.types.NetBoxLoadBalancing{model_name}Type"
     try:
         return import_string(class_name)
     except ImportError:
@@ -22,7 +22,7 @@ def get_graphql_type_for_model(model):
         )
 
 
-class NetBoxLoadBalancerGraphQLMixin:
+class NetBoxLoadBalancingGraphQLMixin:
     def _get_graphql_base_name(self):
         base_name = self.model._meta.verbose_name.lower().replace(" ", "")
         return getattr(self, "graphql_base_name", f"netbox_load_balancing_{base_name}")

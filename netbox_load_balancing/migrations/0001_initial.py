@@ -509,8 +509,8 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
-                "verbose_name": "LB LBService Assignment",
-                "verbose_name_plural": "LB LBService Assignments",
+                "verbose_name": "LB Service Assignment",
+                "verbose_name_plural": "LB Service Assignments",
                 "indexes": [
                     models.Index(
                         fields=["assigned_object_type", "assigned_object_id"],

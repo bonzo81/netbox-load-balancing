@@ -1,4 +1,6 @@
+from dcim.models import Device, VirtualDeviceContext
 from netbox.plugins import PluginTemplateExtension
+from ipam.models import Prefix, IPRange
 
 from netbox_load_balancing.models import (
     LBServiceAssignment,
@@ -7,6 +9,8 @@ from netbox_load_balancing.models import (
     MemberAssignment,
     HealthMonitor,
     Pool,
+    VirtualIPPoolAssignment,
+    VirtualIP,
 )
 
 from netbox_load_balancing.tables import (
@@ -14,11 +18,16 @@ from netbox_load_balancing.tables import (
     PoolAssignmentTable,
     HealthMonitorAssignmentTable,
     MemberAssignmentTable,
+    VirtualIPPoolAssignmentTable,
 )
 
 
-class IPAddressContextInfo(PluginTemplateExtension):
-    models = ["ipam.ipaddress"]
+class VirtualIPContextInfo(PluginTemplateExtension):
+    models = [
+        "netbox_load_balancing.virtualip",
+        "dcim.device",
+        "dcim.virtualdevicecontext",
+    ]
 
     def right_page(self):
         """ """
@@ -40,7 +49,14 @@ class IPAddressContextInfo(PluginTemplateExtension):
 
     def x_page(self):
         obj = self.context["object"]
-        service_lists = LBServiceAssignment.objects.filter(lbservice=obj)
+        if isinstance(obj, Device):
+            service_lists = LBServiceAssignment.objects.filter(device=obj)
+        elif isinstance(obj, VirtualDeviceContext):
+            service_lists = LBServiceAssignment.objects.filter(virtualdevicecontext=obj)
+        elif isinstance(obj, VirtualIP):
+            service_lists = LBServiceAssignment.objects.filter(virtualip=obj)
+        else:
+            return ""
         service_table = LBServiceAssignmentTable(service_lists)
         return self.render(
             "netbox_load_balancing/assignments/service.html",
@@ -48,8 +64,8 @@ class IPAddressContextInfo(PluginTemplateExtension):
         )
 
 
-class IPRangeContextInfo(PluginTemplateExtension):
-    models = ["ipam.iprange"]
+class PoolContextInfo(PluginTemplateExtension):
+    models = ["netbox_load_balancing.lbservice"]
 
     def right_page(self):
         """ """
@@ -71,10 +87,46 @@ class IPRangeContextInfo(PluginTemplateExtension):
 
     def x_page(self):
         obj = self.context["object"]
-        pool_lists = PoolAssignment.objects.filter(iprange=obj)
+        pool_lists = PoolAssignment.objects.filter(lbservice=obj)
         pool_table = PoolAssignmentTable(pool_lists)
         return self.render(
             "netbox_load_balancing/assignments/pool.html",
+            extra_context={"related_pool_table": pool_table},
+        )
+
+
+class VirtualIPPoolContextInfo(PluginTemplateExtension):
+    models = ["ipam.prefix", "ipam.iprange"]
+
+    def right_page(self):
+        """ """
+        if self.context["config"].get("pool_ext_page") == "right":
+            return self.x_page()
+        return ""
+
+    def left_page(self):
+        """ """
+        if self.context["config"].get("pool_ext_page") == "left":
+            return self.x_page()
+        return ""
+
+    def full_width_page(self):
+        """ """
+        if self.context["config"].get("pool_ext_page") == "full_width":
+            return self.x_page()
+        return ""
+
+    def x_page(self):
+        obj = self.context["object"]
+        if isinstance(obj, Prefix):
+            pool_lists = VirtualIPPoolAssignment.objects.filter(prefix=obj)
+        elif isinstance(obj, IPRange):
+            pool_lists = VirtualIPPoolAssignment.objects.filter(ip_range=obj)
+        else:
+            return ""
+        pool_table = VirtualIPPoolAssignmentTable(pool_lists)
+        return self.render(
+            "netbox_load_balancing/assignments/virtualippool.html",
             extra_context={"related_pool_table": pool_table},
         )
 
@@ -147,8 +199,9 @@ class HealthMonitorContextInfo(PluginTemplateExtension):
 
 
 template_extensions = [
-    IPAddressContextInfo,
-    IPRangeContextInfo,
+    VirtualIPContextInfo,
+    PoolContextInfo,
+    VirtualIPPoolContextInfo,
     MemberContextInfo,
     HealthMonitorContextInfo,
 ]

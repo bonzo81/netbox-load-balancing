@@ -69,6 +69,8 @@ class MemberFiterSetTestCase(TestCase, ChangeLoggedFilterSetTests):
             ]
         }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 3)
+        params = {"ip_address": [str(self.addresses[0].address)]}
+        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 1)
 
     def test_disabled(self):
         params = {"disabled": False}

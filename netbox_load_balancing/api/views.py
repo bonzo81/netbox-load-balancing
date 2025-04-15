@@ -11,6 +11,9 @@ from netbox_load_balancing.models import (
     PoolAssignment,
     Member,
     MemberAssignment,
+    VirtualIPPool,
+    VirtualIPPoolAssignment,
+    VirtualIP,
 )
 
 from .serializers import (
@@ -23,6 +26,9 @@ from .serializers import (
     PoolAssignmentSerializer,
     MemberSerializer,
     MemberAssignmentSerializer,
+    VirtualIPPoolSerializer,
+    VirtualIPPoolAssignmentSerializer,
+    VirtualIPSerializer,
 )
 
 from netbox_load_balancing.filtersets import (
@@ -35,6 +41,9 @@ from netbox_load_balancing.filtersets import (
     PoolAssignmentFilterSet,
     MemberFilterSet,
     MemberAssignmentFilterSet,
+    VirtualIPPoolFilterSet,
+    VirtualIPPoolAssignmentFilterSet,
+    VirtualIPFilterSet,
 )
 
 
@@ -53,6 +62,24 @@ class LBServiceAssignmentViewSet(NetBoxModelViewSet):
     queryset = LBServiceAssignment.objects.all()
     serializer_class = LBServiceAssignmentSerializer
     filterset_class = LBServiceAssignmentFilterSet
+
+
+class VirtualIPPoolViewSet(NetBoxModelViewSet):
+    queryset = VirtualIPPool.objects.prefetch_related("tenant", "tags")
+    serializer_class = VirtualIPPoolSerializer
+    filterset_class = VirtualIPPoolFilterSet
+
+
+class VirtualIPPoolAssignmentViewSet(NetBoxModelViewSet):
+    queryset = VirtualIPPoolAssignment.objects.all()
+    serializer_class = VirtualIPPoolAssignmentSerializer
+    filterset_class = VirtualIPPoolAssignmentFilterSet
+
+
+class VirtualIPViewSet(NetBoxModelViewSet):
+    queryset = VirtualIP.objects.prefetch_related("tags")
+    serializer_class = VirtualIPSerializer
+    filterset_class = VirtualIPFilterSet
 
 
 class HealthMonitorViewSet(NetBoxModelViewSet):

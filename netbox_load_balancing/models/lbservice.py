@@ -2,12 +2,14 @@ from django.urls import reverse
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
+
+from dcim.models import Device, VirtualDeviceContext
 from netbox.models import PrimaryModel, NetBoxModel
 from netbox.models.features import ContactsMixin
-from ipam.models import IPAddress
 from netbox.search import SearchIndex, register_search
 
 from netbox_load_balancing.constants import SERVICE_ASSIGNMENT_MODELS
+from netbox_load_balancing.models import VirtualIP
 
 
 _all__ = ("LBService", "LBServiceAssignment", "ServiceIndex")
@@ -61,7 +63,9 @@ class LBServiceAssignment(NetBoxModel):
     clone_fields = ("assigned_object_type", "assigned_object_id")
 
     prerequisite_models = (
-        "ipam.IPAddress",
+        "dcim.Device",
+        "dcim.VirtualDeviceContext",
+        "netbox_load_balancing.VirtualIP",
         "netbox_load_balancing.LBService",
     )
 
@@ -73,8 +77,8 @@ class LBServiceAssignment(NetBoxModel):
                 name="%(app_label)s_%(class)s_unique_service",
             ),
         )
-        verbose_name = _("LB LBService Assignment")
-        verbose_name_plural = _("LB LBService Assignments")
+        verbose_name = _("LB Service Assignment")
+        verbose_name_plural = _("LB Service Assignments")
 
     def __str__(self):
         return f"{self.assigned_object}: {self.service}"
@@ -86,7 +90,7 @@ class LBServiceAssignment(NetBoxModel):
 
 
 @register_search
-class ServiceIndex(SearchIndex):
+class LBServiceIndex(SearchIndex):
     model = LBService
     fields = (
         ("name", 100),
@@ -99,5 +103,19 @@ GenericRelation(
     to=LBServiceAssignment,
     content_type_field="assigned_object_type",
     object_id_field="assigned_object_id",
-    related_query_name="lbservice",
-).contribute_to_class(IPAddress, "lbservices")
+    related_query_name="virtualip",
+).contribute_to_class(VirtualIP, "lbservices")
+
+GenericRelation(
+    to=LBServiceAssignment,
+    content_type_field="assigned_object_type",
+    object_id_field="assigned_object_id",
+    related_query_name="device",
+).contribute_to_class(Device, "lbservices")
+
+GenericRelation(
+    to=LBServiceAssignment,
+    content_type_field="assigned_object_type",
+    object_id_field="assigned_object_id",
+    related_query_name="virtualdevicecontext",
+).contribute_to_class(VirtualDeviceContext, "lbservices")

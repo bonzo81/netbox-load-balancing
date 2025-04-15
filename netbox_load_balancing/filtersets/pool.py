@@ -32,7 +32,7 @@ class PoolFilterSet(NetBoxModelFilterSet):
     )
     listener = django_filters.ModelMultipleChoiceFilter(
         queryset=Listener.objects.all(),
-        field_name="listeners",
+        field_name="listeners__name",
         to_field_name="name",
         label=_("Listener (Name)"),
     )
