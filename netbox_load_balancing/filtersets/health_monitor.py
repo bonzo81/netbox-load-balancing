@@ -72,6 +72,7 @@ class HealthMonitorFilterSet(NetBoxModelFilterSet):
 class HealthMonitorAssignmentFilterSet(NetBoxModelFilterSet):
     assigned_object_type = ContentTypeFilter()
     disabled = django_filters.BooleanFilter()
+    weight = django_filters.BooleanFilter()
     monitor_id = django_filters.ModelMultipleChoiceFilter(
         queryset=HealthMonitor.objects.all(),
         label=_("Health Monitor (ID)"),
@@ -93,6 +94,7 @@ class HealthMonitorAssignmentFilterSet(NetBoxModelFilterSet):
             "id",
             "monitor_id",
             "disabled",
+            "weight",
             "assigned_object_type",
             "assigned_object_id",
         )

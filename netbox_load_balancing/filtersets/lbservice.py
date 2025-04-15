@@ -10,7 +10,7 @@ from utilities.filters import (
     MultiValueNumberFilter,
 )
 
-from ipam.models import IPAddress
+from netbox_load_balancing.models import VirtualIP
 
 from netbox_load_balancing.models import (
     LBService,
@@ -43,15 +43,15 @@ class LBServiceAssignmentFilterSet(NetBoxModelFilterSet):
         queryset=LBService.objects.all(),
         label=_("LBService (ID)"),
     )
-    ip_address = MultiValueCharFilter(
+    virtualip = MultiValueCharFilter(
         method="filter_address",
-        field_name="address",
-        label=_("IP Address (Address)"),
+        field_name="name",
+        label=_("Virtual IP (Name)"),
     )
-    ip_address_id = MultiValueNumberFilter(
+    virtualip_id = MultiValueNumberFilter(
         method="filter_address",
         field_name="pk",
-        label=_("IP Address (ID)"),
+        label=_("Virtual IP (ID)"),
     )
 
     class Meta:
@@ -60,10 +60,10 @@ class LBServiceAssignmentFilterSet(NetBoxModelFilterSet):
 
     def filter_address(self, queryset, name, value):
         if not (
-            addresses := IPAddress.objects.filter(**{f"{name}__in": value})
+            addresses := VirtualIP.objects.filter(**{f"{name}__in": value})
         ).exists():
             return queryset.none()
         return queryset.filter(
-            assigned_object_type=ContentType.objects.get_for_model(IPAddress),
+            assigned_object_type=ContentType.objects.get_for_model(VirtualIP),
             assigned_object_id__in=addresses.values_list("id", flat=True),
         )

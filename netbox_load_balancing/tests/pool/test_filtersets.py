@@ -79,6 +79,10 @@ class PoolFiterSetTestCase(TestCase, ChangeLoggedFilterSetTests):
             ]
         }
         self.assertEqual(self.filterset(params, self.queryset).qs.count(), 3)
+        params = {"listener": [self.listeners[0].name]}
+        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 2)
+        params = {"listener": [self.listeners[0].name, self.listeners[1].pk]}
+        self.assertEqual(self.filterset(params, self.queryset).qs.count(), 3)
 
     def test_defaults(self):
         params = {"algorythm": [PoolAlgorythmChoices.LEAST_CONNECTION]}

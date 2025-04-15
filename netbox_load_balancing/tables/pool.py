@@ -52,7 +52,7 @@ class PoolAssignmentTable(NetBoxTable):
     assigned_object = tables.Column(
         linkify=True,
         orderable=False,
-        verbose_name=_("IP Range"),
+        verbose_name=_("LB Service"),
     )
     pool = tables.Column(verbose_name=_("Pool"), linkify=True)
     actions = ActionsColumn(actions=("edit", "delete"))

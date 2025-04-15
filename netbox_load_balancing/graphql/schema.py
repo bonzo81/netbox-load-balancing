@@ -4,57 +4,79 @@ import strawberry
 import strawberry_django
 
 from .types import (
-    NetBoxLoadBalancerLBServiceType,
-    NetBoxLoadBalancerListenerType,
-    NetBoxLoadBalancerPoolType,
-    NetBoxLoadBalancerMemberType,
-    NetBoxLoadBalancerHealthMonitorType,
+    NetBoxLoadBalancingLBServiceType,
+    NetBoxLoadBalancingListenerType,
+    NetBoxLoadBalancingPoolType,
+    NetBoxLoadBalancingMemberType,
+    NetBoxLoadBalancingHealthMonitorType,
+    NetBoxLoadBalancingVirtualIPPoolType,
+    NetBoxLoadBalancingVirtualIPType,
 )
 
 
 @strawberry.type(name="Query")
-class NetBoxLoadBalancerLBServiceQuery:
-    netbox_load_balancing_lbservice: NetBoxLoadBalancerLBServiceType = (
+class NetBoxLoadBalancingLBServiceQuery:
+    netbox_load_balancing_lbservice: NetBoxLoadBalancingLBServiceType = (
         strawberry_django.field()
     )
-    netbox_load_balancing_lbservice_list: List[NetBoxLoadBalancerLBServiceType] = (
-        strawberry_django.field()
-    )
-
-
-@strawberry.type(name="Query")
-class NetBoxLoadBalancerListenerQuery:
-    netbox_load_balancing_listener: NetBoxLoadBalancerListenerType = (
-        strawberry_django.field()
-    )
-    netbox_load_balancing_listener_list: List[NetBoxLoadBalancerListenerType] = (
+    netbox_load_balancing_lbservice_list: List[NetBoxLoadBalancingLBServiceType] = (
         strawberry_django.field()
     )
 
 
 @strawberry.type(name="Query")
-class NetBoxLoadBalancerPoolQuery:
-    netbox_load_balancing_pool: NetBoxLoadBalancerPoolType = strawberry_django.field()
-    netbox_load_balancing_pool_list: List[NetBoxLoadBalancerPoolType] = (
+class NetBoxLoadBalancingListenerQuery:
+    netbox_load_balancing_listener: NetBoxLoadBalancingListenerType = (
+        strawberry_django.field()
+    )
+    netbox_load_balancing_listener_list: List[NetBoxLoadBalancingListenerType] = (
         strawberry_django.field()
     )
 
 
 @strawberry.type(name="Query")
-class NetBoxLoadBalancerMemberQuery:
-    netbox_load_balancing_member: NetBoxLoadBalancerMemberType = (
-        strawberry_django.field()
-    )
-    netbox_load_balancing_member_list: List[NetBoxLoadBalancerMemberType] = (
+class NetBoxLoadBalancingPoolQuery:
+    netbox_load_balancing_pool: NetBoxLoadBalancingPoolType = strawberry_django.field()
+    netbox_load_balancing_pool_list: List[NetBoxLoadBalancingPoolType] = (
         strawberry_django.field()
     )
 
 
 @strawberry.type(name="Query")
-class NetBoxLoadBalancerHealthMonitorQuery:
-    netbox_load_balancing_healthmonitor: NetBoxLoadBalancerHealthMonitorType = (
+class NetBoxLoadBalancingMemberQuery:
+    netbox_load_balancing_member: NetBoxLoadBalancingMemberType = (
+        strawberry_django.field()
+    )
+    netbox_load_balancing_member_list: List[NetBoxLoadBalancingMemberType] = (
+        strawberry_django.field()
+    )
+
+
+@strawberry.type(name="Query")
+class NetBoxLoadBalancingHealthMonitorQuery:
+    netbox_load_balancing_healthmonitor: NetBoxLoadBalancingHealthMonitorType = (
         strawberry_django.field()
     )
     netbox_load_balancing_healthmonitor_list: List[
-        NetBoxLoadBalancerHealthMonitorType
+        NetBoxLoadBalancingHealthMonitorType
     ] = strawberry_django.field()
+
+
+@strawberry.type(name="Query")
+class NetBoxLoadBalancingVirtualIPPoolQuery:
+    netbox_load_balancing_virtualippool: NetBoxLoadBalancingVirtualIPPoolType = (
+        strawberry_django.field()
+    )
+    netbox_load_balancing_virtualippool_list: List[
+        NetBoxLoadBalancingVirtualIPPoolType
+    ] = strawberry_django.field()
+
+
+@strawberry.type(name="Query")
+class NetBoxLoadBalancingVirtualIPQuery:
+    netbox_load_balancing_virtualip: NetBoxLoadBalancingVirtualIPType = (
+        strawberry_django.field()
+    )
+    netbox_load_balancing_virtualip_list: List[NetBoxLoadBalancingVirtualIPType] = (
+        strawberry_django.field()
+    )

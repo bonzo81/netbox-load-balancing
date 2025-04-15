@@ -1,15 +1,19 @@
 from .schema import (
-    NetBoxLoadBalancerLBServiceQuery,
-    NetBoxLoadBalancerListenerQuery,
-    NetBoxLoadBalancerPoolQuery,
-    NetBoxLoadBalancerMemberQuery,
-    NetBoxLoadBalancerHealthMonitorQuery,
+    NetBoxLoadBalancingLBServiceQuery,
+    NetBoxLoadBalancingListenerQuery,
+    NetBoxLoadBalancingPoolQuery,
+    NetBoxLoadBalancingMemberQuery,
+    NetBoxLoadBalancingHealthMonitorQuery,
+    NetBoxLoadBalancingVirtualIPPoolQuery,
+    NetBoxLoadBalancingVirtualIPQuery,
 )
 
 schema = [
-    NetBoxLoadBalancerLBServiceQuery,
-    NetBoxLoadBalancerListenerQuery,
-    NetBoxLoadBalancerPoolQuery,
-    NetBoxLoadBalancerMemberQuery,
-    NetBoxLoadBalancerHealthMonitorQuery,
+    NetBoxLoadBalancingLBServiceQuery,
+    NetBoxLoadBalancingListenerQuery,
+    NetBoxLoadBalancingPoolQuery,
+    NetBoxLoadBalancingMemberQuery,
+    NetBoxLoadBalancingHealthMonitorQuery,
+    NetBoxLoadBalancingVirtualIPPoolQuery,
+    NetBoxLoadBalancingVirtualIPQuery,
 ]

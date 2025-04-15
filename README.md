@@ -23,6 +23,8 @@ This plugin is based on the OpenStack modelling of [LBaaS](https://docs.openstac
 This plugin provides following Models:
 
 * Services
+* Virtual Pools
+* Virtual IPs
 * Listeners
 * Health Monitors
 * Pools
