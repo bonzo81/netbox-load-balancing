@@ -33,8 +33,8 @@ The installation of NetBox Load Balancing requires a Python interpreter and a wo
 NetBox Load Balancing is compatible with the following NetBox versions.
 
 | NetBox Version | NetBox Load Balancing Version |
-|----------------|------------------------------|
-| NetBox 4.2     | \>= 1.0.0                    |
+|----------------|-------------------------------|
+| NetBox 4.2     | \>= 1.0.1                     |
 
 
 ### Installation of NetBox Load Balancing
