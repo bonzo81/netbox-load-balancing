@@ -2,7 +2,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import get_object_or_404
 
 from netbox.views import generic
-from tenancy.views import ObjectContactsView
 from utilities.views import register_model_view
 
 from netbox_load_balancing.tables import PoolTable, ListenerTable
@@ -26,7 +25,6 @@ __all__ = (
     "PoolBulkEditView",
     "PoolBulkDeleteView",
     "PoolBulkImportView",
-    "PoolContactsView",
     "PoolAssignmentEditView",
     "PoolAssignmentDeleteView",
 )
@@ -84,11 +82,6 @@ class PoolBulkDeleteView(generic.BulkDeleteView):
 class PoolBulkImportView(generic.BulkImportView):
     queryset = Pool.objects.all()
     model_form = PoolImportForm
-
-
-@register_model_view(Pool, "contacts")
-class PoolContactsView(ObjectContactsView):
-    queryset = Pool.objects.all()
 
 
 @register_model_view(PoolAssignment, "add", detail=False)

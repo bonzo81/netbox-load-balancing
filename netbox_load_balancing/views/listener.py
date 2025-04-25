@@ -1,5 +1,4 @@
 from netbox.views import generic
-from tenancy.views import ObjectContactsView
 from utilities.views import register_model_view
 
 from netbox_load_balancing.tables import ListenerTable
@@ -75,5 +74,5 @@ class ListenerBulkImportView(generic.BulkImportView):
 
 
 @register_model_view(Listener, "contacts")
-class ListenerContactsView(ObjectContactsView):
+class ListenerContactsView(generic.ObjectContactsView):
     queryset = Listener.objects.all()

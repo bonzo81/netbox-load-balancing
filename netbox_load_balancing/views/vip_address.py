@@ -1,5 +1,4 @@
 from netbox.views import generic
-from tenancy.views import ObjectContactsView
 from utilities.views import register_model_view
 
 from netbox_load_balancing.tables import VirtualIPTable
@@ -22,7 +21,6 @@ __all__ = (
     "VirtualIPBulkEditView",
     "VirtualIPBulkDeleteView",
     "VirtualIPBulkImportView",
-    "VirtualIPContactsView",
 )
 
 
@@ -72,8 +70,3 @@ class VirtualIPBulkDeleteView(generic.BulkDeleteView):
 class VirtualIPBulkImportView(generic.BulkImportView):
     queryset = VirtualIP.objects.all()
     model_form = VirtualIPImportForm
-
-
-@register_model_view(VirtualIP, "contacts")
-class VirtualIPContactsView(ObjectContactsView):
-    queryset = VirtualIP.objects.all()

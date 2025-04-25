@@ -2,7 +2,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import get_object_or_404
 
 from netbox.views import generic
-from tenancy.views import ObjectContactsView
 from utilities.views import register_model_view
 
 from netbox_load_balancing.tables import HealthMonitorTable
@@ -26,7 +25,6 @@ __all__ = (
     "HealthMonitorBulkEditView",
     "HealthMonitorBulkDeleteView",
     "HealthMonitorBulkImportView",
-    "HealthMonitorContactsView",
     "HealthMonitorAssignmentEditView",
     "HealthMonitorAssignmentDeleteView",
 )
@@ -78,11 +76,6 @@ class HealthMonitorBulkDeleteView(generic.BulkDeleteView):
 class HealthMonitorBulkImportView(generic.BulkImportView):
     queryset = HealthMonitor.objects.all()
     model_form = HealthMonitorImportForm
-
-
-@register_model_view(HealthMonitor, "contacts")
-class HealthMonitorContactsView(ObjectContactsView):
-    queryset = HealthMonitor.objects.all()
 
 
 @register_model_view(HealthMonitorAssignment, "add", detail=False)

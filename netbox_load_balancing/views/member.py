@@ -2,7 +2,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import get_object_or_404
 
 from netbox.views import generic
-from tenancy.views import ObjectContactsView
 from utilities.views import register_model_view
 
 from netbox_load_balancing.tables import MemberTable
@@ -26,7 +25,6 @@ __all__ = (
     "MemberBulkEditView",
     "MemberBulkDeleteView",
     "MemberBulkImportView",
-    "MemberContactsView",
     "MemberAssignmentEditView",
     "MemberAssignmentDeleteView",
 )
@@ -78,11 +76,6 @@ class MemberBulkDeleteView(generic.BulkDeleteView):
 class MemberBulkImportView(generic.BulkImportView):
     queryset = Member.objects.all()
     model_form = MemberImportForm
-
-
-@register_model_view(Member, "contacts")
-class MemberContactsView(ObjectContactsView):
-    queryset = Member.objects.all()
 
 
 @register_model_view(MemberAssignment, "add", detail=False)
