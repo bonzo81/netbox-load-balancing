@@ -94,12 +94,12 @@ class NetBoxLoadBalancingHealthMonitorFilter(
         | None
     ) = strawberry_django.filter_field()
     http_secure: FilterLookup[bool] | None = strawberry_django.filter_field()
-    # http_response_codes: (
-    #     Annotated[
-    #         "IntegerArrayLookup", strawberry.lazy("netbox.graphql.filter_lookups")
-    #     ]
-    #     | None
-    # ) = strawberry_django.filter_field()
+    http_response_codes: (
+        Annotated[
+            "IntegerArrayLookup", strawberry.lazy("netbox.graphql.filter_lookups")
+        ]
+        | None
+    ) = strawberry_django.filter_field()
     probe_interval: FilterLookup[int] | None = strawberry_django.filter_field()
     response_timeout: FilterLookup[int] | None = strawberry_django.filter_field()
     disabled: FilterLookup[bool] | None = strawberry_django.filter_field()

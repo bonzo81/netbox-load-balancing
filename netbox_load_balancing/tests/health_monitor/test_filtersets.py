@@ -9,7 +9,7 @@ from netbox_load_balancing.choices import (
 )
 
 
-class AddressFiterSetTestCase(TestCase, ChangeLoggedFilterSetTests):
+class HealthMonitorFiterSetTestCase(TestCase, ChangeLoggedFilterSetTests):
     queryset = HealthMonitor.objects.all()
     filterset = HealthMonitorFilterSet
 

@@ -33,12 +33,12 @@ class HealthMonitorTypeChoices(ChoiceSet):
 
 
 class HealthMonitorHTTPVersionChoices(ChoiceSet):
-    VERSION_1 = "1.0"
-    VERSION_11 = "1.1"
+    VERSION_1 = "HTTP 1.0"
+    VERSION_11 = "HTTP 1.1"
 
     CHOICES = [
-        (VERSION_1, "1.0"),
-        (VERSION_11, "1.1"),
+        (VERSION_1, "HTTP 1.0"),
+        (VERSION_11, "HTTP 1.1"),
     ]
 
 
