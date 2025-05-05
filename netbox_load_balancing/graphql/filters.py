@@ -94,9 +94,12 @@ class NetBoxLoadBalancingHealthMonitorFilter(
         | None
     ) = strawberry_django.filter_field()
     http_secure: FilterLookup[bool] | None = strawberry_django.filter_field()
-    http_response_codes: IntegerArrayLookup[int] | None = (
-        strawberry_django.filter_field()
-    )
+    http_response_codes: (
+        Annotated[
+            "IntegerArrayLookup", strawberry.lazy("netbox.graphql.filter_lookups")
+        ]
+        | None
+    ) = strawberry_django.filter_field()
     probe_interval: FilterLookup[int] | None = strawberry_django.filter_field()
     response_timeout: FilterLookup[int] | None = strawberry_django.filter_field()
     disabled: FilterLookup[bool] | None = strawberry_django.filter_field()
@@ -167,11 +170,11 @@ class NetBoxLoadBalancingVirtualIPFilter(ContactFilterMixin, NetBoxModelFilterMi
     dns_name: FilterLookup[str] | None = strawberry_django.filter_field()
     disabled: FilterLookup[bool] | None = strawberry_django.filter_field()
     virtual_pool: (
-            Annotated[
-                "NetBoxLoadBalancingVirtualIPPoolFilter",
-                strawberry.lazy("netbox_load_balancing.graphql.filters"),
-            ]
-            | None
+        Annotated[
+            "NetBoxLoadBalancingVirtualIPPoolFilter",
+            strawberry.lazy("netbox_load_balancing.graphql.filters"),
+        ]
+        | None
     ) = strawberry_django.filter_field()
     address: (
         Annotated["IPAddressFilter", strawberry.lazy("ipam.graphql.filters")] | None
