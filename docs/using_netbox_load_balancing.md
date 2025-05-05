@@ -26,7 +26,7 @@ The installation of plugins in general is described in the [NetBox documentation
 ### Requirements
 The installation of NetBox Load Balancing requires a Python interpreter and a working NetBox deployment. The following versions are currently supported:
 
-* NetBox 4.1.0 or higher
+* NetBox 4.2.0 or higher
 * Python 3.10 or higher
 
 ### Compatibility
@@ -35,6 +35,7 @@ NetBox Load Balancing is compatible with the following NetBox versions.
 | NetBox Version | NetBox Load Balancing Version |
 |----------------|-------------------------------|
 | NetBox 4.2     | \>= 1.0.1                     |
+| NetBox 4.3     | \>= 1.1.0                     |
 
 
 ### Installation of NetBox Load Balancing

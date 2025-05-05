@@ -1,5 +1,4 @@
 from netbox.views import generic
-from tenancy.views import ObjectContactsView
 from utilities.views import register_model_view
 
 from netbox_load_balancing.tables import VirtualIPTable
@@ -22,7 +21,6 @@ __all__ = (
     "VirtualIPBulkEditView",
     "VirtualIPBulkDeleteView",
     "VirtualIPBulkImportView",
-    "VirtualIPContactsView",
 )
 
 
@@ -50,7 +48,6 @@ class VirtualIPEditView(generic.ObjectEditView):
 @register_model_view(VirtualIP, "delete")
 class VirtualIPDeleteView(generic.ObjectDeleteView):
     queryset = VirtualIP.objects.all()
-    default_return_url = "plugins:netbox_load_balancing:virtualip_list"
 
 
 @register_model_view(VirtualIP, "bulk_edit", path="edit", detail=False)
@@ -65,15 +62,9 @@ class VirtualIPBulkEditView(generic.BulkEditView):
 class VirtualIPBulkDeleteView(generic.BulkDeleteView):
     queryset = VirtualIP.objects.all()
     table = VirtualIPTable
-    default_return_url = "plugins:netbox_load_balancing:virtualip_list"
 
 
 @register_model_view(VirtualIP, "bulk_import", detail=False)
 class VirtualIPBulkImportView(generic.BulkImportView):
     queryset = VirtualIP.objects.all()
     model_form = VirtualIPImportForm
-
-
-@register_model_view(VirtualIP, "contacts")
-class VirtualIPContactsView(ObjectContactsView):
-    queryset = VirtualIP.objects.all()

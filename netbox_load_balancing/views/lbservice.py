@@ -2,7 +2,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import get_object_or_404
 
 from netbox.views import generic
-from tenancy.views import ObjectContactsView
 from utilities.views import register_model_view
 
 from netbox_load_balancing.tables import LBServiceTable
@@ -26,7 +25,6 @@ __all__ = (
     "LBServiceBulkEditView",
     "LBServiceBulkDeleteView",
     "LBServiceBulkImportView",
-    "LBServiceContactsView",
     "LBServiceAssignmentEditView",
     "LBServiceAssignmentDeleteView",
 )
@@ -56,7 +54,6 @@ class LBServiceEditView(generic.ObjectEditView):
 @register_model_view(LBService, "delete")
 class LBServiceDeleteView(generic.ObjectDeleteView):
     queryset = LBService.objects.all()
-    default_return_url = "plugins:netbox_load_balancing:lbservice_list"
 
 
 @register_model_view(LBService, "bulk_edit", path="edit", detail=False)
@@ -71,18 +68,12 @@ class LBServiceBulkEditView(generic.BulkEditView):
 class LBServiceBulkDeleteView(generic.BulkDeleteView):
     queryset = LBService.objects.all()
     table = LBServiceTable
-    default_return_url = "plugins:netbox_load_balancing:lbservice_list"
 
 
 @register_model_view(LBService, "bulk_import", detail=False)
 class LBServiceBulkImportView(generic.BulkImportView):
     queryset = LBService.objects.all()
     model_form = LBServiceImportForm
-
-
-@register_model_view(LBService, "contacts")
-class LBServiceContactsView(ObjectContactsView):
-    queryset = LBService.objects.all()
 
 
 @register_model_view(LBServiceAssignment, "add", detail=False)

@@ -32,9 +32,10 @@ This plugin provides following Models:
 
 ## Compatibility
 
-|            |           |
-|------------|-----------|
-| NetBox 4.2 | \>= 1.0.1 |
+| NetBox Version | NetBox Load Balancing Version |
+|----------------|-------------------------------|
+| NetBox 4.2     | \>= 1.0.1                     |
+| NetBox 4.3     | \>= 1.1.0                     |
 
 ## Installation
 

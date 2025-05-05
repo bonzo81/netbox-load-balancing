@@ -1,5 +1,4 @@
 from netbox.views import generic
-from tenancy.views import ObjectContactsView
 from utilities.views import register_model_view
 
 from netbox_load_balancing.tables import ListenerTable
@@ -22,7 +21,6 @@ __all__ = (
     "ListenerBulkEditView",
     "ListenerBulkDeleteView",
     "ListenerBulkImportView",
-    "ListenerContactsView",
 )
 
 
@@ -50,7 +48,6 @@ class ListenerEditView(generic.ObjectEditView):
 @register_model_view(Listener, "delete")
 class ListenerDeleteView(generic.ObjectDeleteView):
     queryset = Listener.objects.all()
-    default_return_url = "plugins:netbox_load_balancing:listener_list"
 
 
 @register_model_view(Listener, "bulk_edit", path="edit", detail=False)
@@ -65,15 +62,9 @@ class ListenerBulkEditView(generic.BulkEditView):
 class ListenerBulkDeleteView(generic.BulkDeleteView):
     queryset = Listener.objects.all()
     table = ListenerTable
-    default_return_url = "plugins:netbox_load_balancing:listener_list"
 
 
 @register_model_view(Listener, "bulk_import", detail=False)
 class ListenerBulkImportView(generic.BulkImportView):
     queryset = Listener.objects.all()
     model_form = ListenerImportForm
-
-
-@register_model_view(Listener, "contacts")
-class ListenerContactsView(ObjectContactsView):
-    queryset = Listener.objects.all()
