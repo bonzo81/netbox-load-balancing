@@ -2,7 +2,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import get_object_or_404
 
 from netbox.views import generic
-from tenancy.views import ObjectContactsView
 from utilities.views import register_model_view
 
 from netbox_load_balancing.tables import PoolTable, ListenerTable
@@ -26,7 +25,6 @@ __all__ = (
     "PoolBulkEditView",
     "PoolBulkDeleteView",
     "PoolBulkImportView",
-    "PoolContactsView",
     "PoolAssignmentEditView",
     "PoolAssignmentDeleteView",
 )
@@ -62,7 +60,6 @@ class PoolEditView(generic.ObjectEditView):
 @register_model_view(Pool, "delete")
 class PoolDeleteView(generic.ObjectDeleteView):
     queryset = Pool.objects.all()
-    default_return_url = "plugins:netbox_load_balancing:pool_list"
 
 
 @register_model_view(Pool, "bulk_edit", path="edit", detail=False)
@@ -77,18 +74,12 @@ class PoolBulkEditView(generic.BulkEditView):
 class PoolBulkDeleteView(generic.BulkDeleteView):
     queryset = Pool.objects.all()
     table = PoolTable
-    default_return_url = "plugins:netbox_load_balancing:pool_list"
 
 
 @register_model_view(Pool, "bulk_import", detail=False)
 class PoolBulkImportView(generic.BulkImportView):
     queryset = Pool.objects.all()
     model_form = PoolImportForm
-
-
-@register_model_view(Pool, "contacts")
-class PoolContactsView(ObjectContactsView):
-    queryset = Pool.objects.all()
 
 
 @register_model_view(PoolAssignment, "add", detail=False)

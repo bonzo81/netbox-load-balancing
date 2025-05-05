@@ -2,7 +2,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import get_object_or_404
 
 from netbox.views import generic
-from tenancy.views import ObjectContactsView
 from utilities.views import register_model_view
 
 from netbox_load_balancing.tables import VirtualIPPoolTable, VirtualIPTable
@@ -26,7 +25,6 @@ __all__ = (
     "VirtualIPPoolBulkEditView",
     "VirtualIPPoolBulkDeleteView",
     "VirtualIPPoolBulkImportView",
-    "VirtualIPPoolContactsView",
     "VirtualIPPoolAssignmentEditView",
     "VirtualIPPoolAssignmentDeleteView",
 )
@@ -64,7 +62,6 @@ class VirtualIPPoolEditView(generic.ObjectEditView):
 @register_model_view(VirtualIPPool, "delete")
 class VirtualIPPoolDeleteView(generic.ObjectDeleteView):
     queryset = VirtualIPPool.objects.all()
-    default_return_url = "plugins:netbox_load_balancing:virtualippool_list"
 
 
 @register_model_view(VirtualIPPool, "bulk_edit", path="edit", detail=False)
@@ -79,18 +76,12 @@ class VirtualIPPoolBulkEditView(generic.BulkEditView):
 class VirtualIPPoolBulkDeleteView(generic.BulkDeleteView):
     queryset = VirtualIPPool.objects.all()
     table = VirtualIPPoolTable
-    default_return_url = "plugins:netbox_load_balancing:virtualippool_list"
 
 
 @register_model_view(VirtualIPPool, "bulk_import", detail=False)
 class VirtualIPPoolBulkImportView(generic.BulkImportView):
     queryset = VirtualIPPool.objects.all()
     model_form = VirtualIPPoolImportForm
-
-
-@register_model_view(VirtualIPPool, "contacts")
-class VirtualIPPoolContactsView(ObjectContactsView):
-    queryset = VirtualIPPool.objects.all()
 
 
 @register_model_view(VirtualIPPoolAssignment, "add", detail=False)
