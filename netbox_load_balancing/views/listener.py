@@ -21,7 +21,6 @@ __all__ = (
     "ListenerBulkEditView",
     "ListenerBulkDeleteView",
     "ListenerBulkImportView",
-    "ListenerContactsView",
 )
 
 
@@ -69,8 +68,3 @@ class ListenerBulkDeleteView(generic.BulkDeleteView):
 class ListenerBulkImportView(generic.BulkImportView):
     queryset = Listener.objects.all()
     model_form = ListenerImportForm
-
-
-@register_model_view(Listener, "contacts")
-class ListenerContactsView(generic.ObjectContactsView):
-    queryset = Listener.objects.all()
