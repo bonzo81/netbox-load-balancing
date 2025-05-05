@@ -62,7 +62,6 @@ class VirtualIPPoolEditView(generic.ObjectEditView):
 @register_model_view(VirtualIPPool, "delete")
 class VirtualIPPoolDeleteView(generic.ObjectDeleteView):
     queryset = VirtualIPPool.objects.all()
-    default_return_url = "plugins:netbox_load_balancing:virtualippool_list"
 
 
 @register_model_view(VirtualIPPool, "bulk_edit", path="edit", detail=False)
@@ -77,7 +76,6 @@ class VirtualIPPoolBulkEditView(generic.BulkEditView):
 class VirtualIPPoolBulkDeleteView(generic.BulkDeleteView):
     queryset = VirtualIPPool.objects.all()
     table = VirtualIPPoolTable
-    default_return_url = "plugins:netbox_load_balancing:virtualippool_list"
 
 
 @register_model_view(VirtualIPPool, "bulk_import", detail=False)

@@ -60,7 +60,6 @@ class PoolEditView(generic.ObjectEditView):
 @register_model_view(Pool, "delete")
 class PoolDeleteView(generic.ObjectDeleteView):
     queryset = Pool.objects.all()
-    default_return_url = "plugins:netbox_load_balancing:pool_list"
 
 
 @register_model_view(Pool, "bulk_edit", path="edit", detail=False)
@@ -75,7 +74,6 @@ class PoolBulkEditView(generic.BulkEditView):
 class PoolBulkDeleteView(generic.BulkDeleteView):
     queryset = Pool.objects.all()
     table = PoolTable
-    default_return_url = "plugins:netbox_load_balancing:pool_list"
 
 
 @register_model_view(Pool, "bulk_import", detail=False)

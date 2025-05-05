@@ -54,7 +54,6 @@ class LBServiceEditView(generic.ObjectEditView):
 @register_model_view(LBService, "delete")
 class LBServiceDeleteView(generic.ObjectDeleteView):
     queryset = LBService.objects.all()
-    default_return_url = "plugins:netbox_load_balancing:lbservice_list"
 
 
 @register_model_view(LBService, "bulk_edit", path="edit", detail=False)
@@ -69,7 +68,6 @@ class LBServiceBulkEditView(generic.BulkEditView):
 class LBServiceBulkDeleteView(generic.BulkDeleteView):
     queryset = LBService.objects.all()
     table = LBServiceTable
-    default_return_url = "plugins:netbox_load_balancing:lbservice_list"
 
 
 @register_model_view(LBService, "bulk_import", detail=False)

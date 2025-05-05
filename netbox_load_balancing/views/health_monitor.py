@@ -54,7 +54,6 @@ class HealthMonitorEditView(generic.ObjectEditView):
 @register_model_view(HealthMonitor, "delete")
 class HealthMonitorDeleteView(generic.ObjectDeleteView):
     queryset = HealthMonitor.objects.all()
-    default_return_url = "plugins:netbox_load_balancing:healthmonitor_list"
 
 
 @register_model_view(HealthMonitor, "bulk_edit", path="edit", detail=False)
@@ -69,7 +68,6 @@ class HealthMonitorBulkEditView(generic.BulkEditView):
 class HealthMonitorBulkDeleteView(generic.BulkDeleteView):
     queryset = HealthMonitor.objects.all()
     table = HealthMonitorTable
-    default_return_url = "plugins:netbox_load_balancing:healthmonitor_list"
 
 
 @register_model_view(HealthMonitor, "bulk_import", detail=False)

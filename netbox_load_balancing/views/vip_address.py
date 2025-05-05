@@ -48,7 +48,6 @@ class VirtualIPEditView(generic.ObjectEditView):
 @register_model_view(VirtualIP, "delete")
 class VirtualIPDeleteView(generic.ObjectDeleteView):
     queryset = VirtualIP.objects.all()
-    default_return_url = "plugins:netbox_load_balancing:virtualip_list"
 
 
 @register_model_view(VirtualIP, "bulk_edit", path="edit", detail=False)
@@ -63,7 +62,6 @@ class VirtualIPBulkEditView(generic.BulkEditView):
 class VirtualIPBulkDeleteView(generic.BulkDeleteView):
     queryset = VirtualIP.objects.all()
     table = VirtualIPTable
-    default_return_url = "plugins:netbox_load_balancing:virtualip_list"
 
 
 @register_model_view(VirtualIP, "bulk_import", detail=False)

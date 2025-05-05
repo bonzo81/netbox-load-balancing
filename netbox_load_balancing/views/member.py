@@ -54,7 +54,6 @@ class MemberEditView(generic.ObjectEditView):
 @register_model_view(Member, "delete")
 class MemberDeleteView(generic.ObjectDeleteView):
     queryset = Member.objects.all()
-    default_return_url = "plugins:netbox_load_balancing:member_list"
 
 
 @register_model_view(Member, "bulk_edit", path="edit", detail=False)
@@ -69,7 +68,6 @@ class MemberBulkEditView(generic.BulkEditView):
 class MemberBulkDeleteView(generic.BulkDeleteView):
     queryset = Member.objects.all()
     table = MemberTable
-    default_return_url = "plugins:netbox_load_balancing:member_list"
 
 
 @register_model_view(Member, "bulk_import", detail=False)
