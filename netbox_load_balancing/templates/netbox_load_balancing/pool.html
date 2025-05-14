@@ -51,12 +51,6 @@
                 </tr>
             </table>
         </div>
-        <div class="card">
-            <h5 class="card-header">
-                {% trans "Listeners" %}
-            </h5>
-            {% render_table listener_table 'inc/table.html' %}
-        </div>
         {% include 'inc/panels/custom_fields.html' %}
         {% plugin_left_page object %}
     </div>
