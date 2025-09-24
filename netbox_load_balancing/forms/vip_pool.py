@@ -17,7 +17,7 @@ from utilities.forms.fields import (
     CSVModelChoiceField,
 )
 
-from tenancy.models import Tenant
+from tenancy.models import Tenant, TenantGroup
 
 from netbox_load_balancing.models import (
     VirtualIPPool,
@@ -91,6 +91,11 @@ class VirtualIPPoolBulkEditForm(NetBoxModelBulkEditForm):
     description = forms.CharField(max_length=200, required=False)
     disabled = forms.BooleanField(required=False)
     tags = TagFilterField(model)
+    tenant_group = DynamicModelChoiceField(
+        queryset=TenantGroup.objects.all(),
+        required=False,
+        label=_("Tenant Group"),
+    )
     tenant = DynamicModelChoiceField(
         queryset=Tenant.objects.all(),
         required=False,

@@ -15,7 +15,7 @@ from netbox_load_balancing.models import VirtualIP, VirtualIPPool
 
 class VirtualIPSerializer(NetBoxModelSerializer):
     url = HyperlinkedIdentityField(
-        view_name="plugins-api:netbox_load_balancing-api:lbservice-detail"
+        view_name="plugins-api:netbox_load_balancing-api:virtualip-detail"
     )
     dns_name = CharField(required=False)
     virtual_pool = VirtualIPPoolSerializer(nested=True, required=True, allow_null=False)
