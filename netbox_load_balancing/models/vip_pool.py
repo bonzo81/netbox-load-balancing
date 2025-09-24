@@ -27,6 +27,7 @@ class VirtualIPPool(ContactsMixin, PrimaryModel):
     class Meta:
         verbose_name = _("Virtual IP Pool")
         verbose_name_plural = _("Virtual IP Pools")
+        ordering = ("name",)
 
     def __str__(self):
         return f"{self.name}"
