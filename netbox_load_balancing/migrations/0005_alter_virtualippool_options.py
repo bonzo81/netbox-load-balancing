@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('netbox_load_balancing', '0004_alter_virtualip_options'),
+        ("netbox_load_balancing", "0004_alter_virtualip_options"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='virtualippool',
-            options={'ordering': ('name',)},
+            name="virtualippool",
+            options={"ordering": ("name",)},
         ),
     ]
