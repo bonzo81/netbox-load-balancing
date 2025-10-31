@@ -38,12 +38,6 @@
                 {% endif %}
             </table>
         </div>
-                <div class="card">
-            <h5 class="card-header">
-                {% trans "Listeners" %}
-            </h5>
-            {% render_table virtual_ip_table 'inc/table.html' %}
-        </div>
         {% include 'inc/panels/custom_fields.html' %}
         {% plugin_left_page object %}
     </div>
@@ -51,6 +45,14 @@
         {% include 'inc/panels/tags.html' %}
         {% include 'inc/panels/comments.html' %}
         {% plugin_right_page object %}
+    </div>
+    <div class="col col-md-12">
+        <div class="card">
+            <h5 class="card-header">
+                {% trans "Listeners" %}
+            </h5>
+            {% render_table virtual_ip_table 'inc/table.html' %}
+        </div>
     </div>
     {% plugin_full_width_page object %}
 </div>
