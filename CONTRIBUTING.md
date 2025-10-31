@@ -15,7 +15,7 @@ Include the following information in your post:
 
 ## Submitting Pull Requests
 
-* Please follow the [NetBox Plugin Development Guide](https://netbox.readthedocs.io/en/stable/plugins/development/), regarding supported interfaces. Exceptions should be rare and be accompanied with a good explanation.
+* Please follow the [NetBox Plugin Development Guide](https://netbox.readthedocs.io/en/stable/plugins/development/), regarding supported interfaces. Exceptions should be rare and be accompanied by a good explanation.
 * Make sure to open an issue before starting work on a pull request, and discuss your idea with the NetBox LoadBalancers community before starting work.
 * Create a new branch, ideally with a name like `fix/short-description-of-the-fix` or `feature/short-description-of-the-feature` to make the project history more readable. PRs based on your `main` branch will not be accepted
 * All new functionality must be accompanied by relevant tests where possible
